@@ -5,10 +5,14 @@ async function initClient(sessionName) {
     session: sessionName,
     puppeteerOptions: {
       headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
+      args: ['--no-sandbox']
     },
+    logQR: true,
+    browserArgs: ['--no-sandbox'],
+    qrLogSkip: false,          // не пропускаем вывод QR
+    autoClose: false,
+    disableWelcome: true,
+    updatesLog: false,
   });
   return client;
 }
-
-module.exports = initClient;
