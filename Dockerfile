@@ -1,21 +1,39 @@
 FROM node:18-slim
 
-# Устанавливаем Chromium и зависимости
+# Устанавливаем зависимости для Chromium
 RUN apt-get update && apt-get install -y \
+    wget \
+    ca-certificates \
+    fonts-liberation \
+    libappindicator3-1 \
+    libasound2 \
+    libatk-bridge2.0-0 \
+    libatk1.0-0 \
+    libcups2 \
+    libdbus-1-3 \
+    libgdk-pixbuf2.0-0 \
+    libnspr4 \
+    libnss3 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxrandr2 \
+    libu2f-udev \
+    libvulkan1 \
+    xdg-utils \
     chromium \
-    fonts-liberation libappindicator3-1 libasound2 \
-    libatk-bridge2.0-0 libatk1.0-0 libcups2 libdbus-1-3 \
-    libgdk-pixbuf2.0-0 libnspr4 libnss3 libxcomposite1 \
-    libxdamage1 libxrandr2 xdg-utils libu2f-udev libvulkan1 \
-    --no-install-recommends && apt-get clean
+    --no-install-recommends && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# Устанавливаем зависимости проекта
+# Устанавливаем рабочую директорию и копируем проект
 WORKDIR /app
 COPY . .
+
+# Устанавливаем зависимости проекта
 RUN npm install
 
-# Задаём переменную окружения для WPPConnect
+# Указываем путь к Chromium
 ENV CHROME_PATH=/usr/bin/chromium
 
-# Запускаем бота
+# Стартовое выполнение
 CMD ["node", "index.js"]
