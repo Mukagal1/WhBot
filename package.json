@@ -10,8 +10,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@wppconnect-team/wppconnect": "^1.37.3",
     "csv-parser": "^3.2.0",
     "csv-writer": "^1.6.0",
-    "node-schedule": "^2.1.1"
+    "node-schedule": "^2.1.1",
+    "qrcode-terminal": "^0.12.0"
   }
 }
